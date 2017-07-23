@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"errors"
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -17,13 +16,14 @@ import (
 	"time"
 
 	"github.com/coreos/go-semver/semver"
+	"github.com/namsral/flag"
 )
 
 var (
 	addrFlag       = flag.String("addr", ":8080", "Serve HTTP at given address")
 	socketFlag     = flag.String("socket", "", "Serve HTTP at given UNIX socket")
-	vanityRootFlag = flag.String("vanity-root", "", "Vanity root URL (e.g.: https://upper.io).")
-	repoRootFlag   = flag.String("repo-root", "", "Git repository root URL (e.g.: https://github.com/upper).")
+	vanityRootFlag = flag.String("vanity_root", "", "Vanity root URL (e.g.: https://upper.io).")
+	repoRootFlag   = flag.String("repo_root", "", "Git repository root URL (e.g.: https://github.com/upper).")
 )
 
 var packagePattern = regexp.MustCompile(`^/([-a-zA-Z0-9]+)\.?(v([0-9]*))?(.*)$`)
@@ -175,7 +175,7 @@ func (repo *Repo) SetVersions(all semver.Versions) {
 
 // RepoRoot returns the repository root, without a schema.
 func (repo *Repo) RepoRoot() string {
-	return repo.Root.RepoHostPath + "/" + repo.Name
+	return repo.Root.RepoHostPath + "/go-" + repo.Name
 }
 
 // VanityRoot returns the vanity repository root, without a schema.
